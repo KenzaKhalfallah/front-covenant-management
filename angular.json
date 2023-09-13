@@ -25,12 +25,36 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "src/assets/css/bootstrap/bootstrap.min.css",
+              "src/assets/css/morris/morris.css",
+              "src/assets/css/style.css",
+              "src/assets/css/blue.css",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css",
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/bootstrap/popper.min.js",
+              "src/assets/js/bootstrap/bootstrap.min.js",
+              "src/assets/js/jquery.slimscroll.js",
+              "src/assets/js/waves.js",
+              "src/assets/js/sidebarmenu.js",
+              "src/assets/js/sticky-kit.min.js",
+              "src/assets/js/custom.min.js",
+              "src/assets/js/jquery.sparkline.min.js",
+              "src/assets/js/raphael-min.js"
+            ]
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -87,12 +111,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.css",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fe3f234d-498f-4035-bc1d-91974645dfb4"
   }
 }

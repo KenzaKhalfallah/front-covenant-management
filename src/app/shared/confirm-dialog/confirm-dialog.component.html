@@ -1,0 +1,11 @@
+<div>
+  <div class="content-container">
+    <span class="content-span full-width">{{data.message}}</span>
+  </div>
+  <button mat-flat-button id="no-button" (click)="closeDialog(false)">No</button>
+  <button mat-flat-button id="yes-button" (click)="closeDialog(true)" cdkFocusInitial>Yes</button>
+
+  <!--<button mat-flat-button id="yes-button" [mat-dialog-close]="true">Yes</button>
+  <button mat-flat-button id="no-button" [mat-dialog-close]="false">No</button>-->
+
+</div>

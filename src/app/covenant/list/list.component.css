@@ -1,0 +1,106 @@
+table {
+  width: 100%;
+}
+
+.mouse {
+  cursor: pointer;
+}
+button {
+  color: gray;
+}
+.mat-form-field {
+  margin-right: 8px;
+}
+.success-dialog {
+  background-color: rgb(153, 50, 50);
+  color: lightgoldenrodyellow;
+}
+.ha {
+  top: 100%;
+  margin-right: 10%;
+}
+.new-item {
+  width: 137px;
+  height: 37px;
+  border: none;
+  background-color: #edf2ff;
+  border-radius: 2px;
+  opacity: 1;
+  display: inline-block;
+
+  font-family: "Rubik", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: 0px;
+  color: #4d7cfe;
+  text-transform: uppercase;
+}
+
+.menu-title {
+  display: inline-block;
+  padding-right: 70%;
+  padding-left: 2%;
+  padding-top: 3%;
+  font-weight: bold;
+}
+.icon {
+  vertical-align: middle;
+}
+.ligne {
+  display: inline-block;
+}
+/*
+Table with expandable rows
+*/
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.hide-action {
+  opacity: 0;
+}
+
+tr:hover td .hide-action {
+  opacity: 1;
+}

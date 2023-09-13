@@ -1,0 +1,157 @@
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <!-- Row -->
+  <div class="row">
+    <!-- Column -->
+    <div class="col-lg-12 col-xlg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-elevation-z8">
+            <form
+              class="form-horizontal form-material"
+              [formGroup]="creatForm"
+              (ngSubmit)="creatForm.valid && create()" novalidate>
+              <br><br>
+              <div class="col-md-12">
+                <!--Les boutons-->
+                <div>
+                  <h3 class="menu-title">Create New Covenant</h3>
+                </div>
+                <br><br><br>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+
+                    <!--Champs Name-->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h2 class="texte">Covenant Name</h2>
+                          <mat-form-field class="form-field" appearance="outline">
+                            <mat-label> Name </mat-label>
+                            <input matInput formControlName="nameCovenant" required />
+                            <mat-error *ngIf="form['nameCovenant'].touched">
+                              <span *ngIf="form['nameCovenant'].hasError('required')"
+                                >This field is required.</span
+                              >
+                              <span *ngIf="form['nameCovenant'].hasError('minLength')"
+                                >This field is invalid.</span
+                              >
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                          <h2 class="texte">Category</h2>
+                          <mat-form-field class="form-field" appearance="outline">
+                            <mat-label> Category </mat-label>
+                            <mat-select formControlName="categoryCovenant" required>
+                              <mat-option [value]='1' >Financial</mat-option>
+                              <mat-option [value]='2' >Non-Financial</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h2 class="texte">Description</h2>
+                          <mat-form-field class="form-field" appearance="outline">
+                            <mat-label> Description </mat-label>
+                            <textarea matInput formControlName="descriptionCovenant"></textarea>
+                            <mat-error *ngIf="form['descriptionCovenant'].touched">
+                              <span *ngIf="form['descriptionCovenant'].hasError('required')"
+                                >This field is required.</span
+                              >
+                              <span *ngIf="form['descriptionCovenant'].hasError('minLength')"
+                                >This field is invalid.</span
+                              >
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                          <h2 class="texte">Type Covenant</h2>
+                          <mat-form-field class="form-field" appearance="outline">
+                            <mat-label> Type </mat-label>
+                            <mat-select formControlName="typeCovenant" required>
+                              <mat-option [value]='1' >Affirmative</mat-option>
+                              <mat-option [value]='2' >Negative</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-6">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h2 class="texte">Period Type</h2>
+                      <mat-form-field class="form-field" appearance="outline">
+                        <mat-label> Period Type </mat-label>
+                        <mat-select formControlName="periodTypeCovenant" required>
+                          <mat-option [value]='1' >Annual</mat-option>
+                          <mat-option [value]='2' >YTD</mat-option>
+                          <mat-option [value]='3' >Interim</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                      <h2 class="texte">Statement Source</h2>
+                      <mat-form-field class="form-field" appearance="outline">
+                        <mat-label> Statement Source </mat-label>
+                        <mat-select formControlName="statementSourceCovenant" required>
+                          <mat-option [value]='1' >Company</mat-option>
+                          <mat-option [value]='2' >Consolidation</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                    <h2 class="texte">Linked Line Item</h2>
+                        <mat-form-field class="form-field" appearance="outline">
+                          <mat-label> Linked Line Item </mat-label>
+                          <mat-select formControlName="linkedLineItem" required>
+                            <mat-option *ngFor="let item of linkedLineItems" [value]="item">
+                              {{ item === 1 ? 'EBITDA' : item === 2 ? 'Equity Ratio' : item === 3 ? 'Debt Service Coverage Ratio' :
+                              item === 4 ? 'Operating Cash Flow' : item === 5 ? 'Current Ratio' : item === 6 ? 'Gross Profit' :
+                              item === 7 ? 'Debt to Equity Ratio' : item === 8 ? 'Interest Coverage Ratio' : item === 9 ? 'Inventory Turnover' : '' }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                      <h2 class="texte">Counterparty</h2>
+                      <mat-form-field class="form-field" appearance="outline">
+                        <mat-label> Counterparty </mat-label>
+                        <mat-select formControlName="idCounterparty" required>
+                          <mat-option *ngFor="let counterparty of counterparties" [value]="counterparty.idCounterparty">
+                            {{ counterparty.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                      <button  mat-raised-button color="primary" type="submit">Save</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

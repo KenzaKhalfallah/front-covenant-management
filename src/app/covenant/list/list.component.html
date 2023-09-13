@@ -1,0 +1,150 @@
+
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h3 class="text-themecolor">Covenant List</h3>
+  </div>
+  <div class="col-md-7 align-self-center">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">Home</li>
+      <li class="breadcrumb-item active">Covenant List</li>
+    </ol>
+  </div>
+  <div>
+    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+  </div>
+</div>
+<div class="container-fluid">
+  <!-- ============================================================== -->
+  <!-- Start Page Content -->
+  <!-- ============================================================== -->
+  <!-- Row -->
+
+  <!-- Row -->
+  <div class="row">
+    <!-- Column -->
+    <div class="col-lg-12 col-xlg-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- Search -->
+          <mat-form-field>
+            <mat-icon matPrefix style="margin-right: 5px">search</mat-icon>
+            <input
+              matInput
+              placeholder="Search a Covenant"
+              value=""
+              [formControl]="search"
+            />
+          </mat-form-field>
+          <div class="mat-elevation-z8">
+            <table multiTemplateDataRows
+            mat-table
+            [dataSource]="dataSource"
+            (matSortChange)="sortData($event)"
+            matSort>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="nameCovenant">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Covenant Name </th>
+                <td mat-cell *matCellDef="let element" class="mouse" (click)="gotoUpdate(element.idCovenant)">  {{element.nameCovenant}} </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="categoryCovenant">
+                <th mat-header-cell *matHeaderCellDef> Category </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.categoryCovenant === 1">Financial</span>
+                  <span *ngIf="element.categoryCovenant === 2">Non-Financial</span>
+                </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="descriptionCovenant">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.descriptionCovenant}} </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="typeCovenant">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.typeCovenant === 1">Affirmative</span>
+                  <span *ngIf="element.typeCovenant === 2">Negative</span>
+                </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="periodTypeCovenant">
+                <th mat-header-cell *matHeaderCellDef> Period Type </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.periodTypeCovenant === 1">Annual</span>
+                  <span *ngIf="element.periodTypeCovenant === 2">YTD</span>
+                  <span *ngIf="element.periodTypeCovenant === 3">Interim</span>
+                </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="statementSourceCovenant">
+                <th mat-header-cell *matHeaderCellDef> Statement Source </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.statementSourceCovenant === 1">Company</span>
+                  <span *ngIf="element.statementSourceCovenant === 2">Consolidation</span>
+                </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="linkedLineItem">
+                <th mat-header-cell *matHeaderCellDef> linkedLineItem </th>
+                <td mat-cell *matCellDef="let element">
+                  <span *ngIf="element.linkedLineItem === 1">EBITDA</span>
+                  <span *ngIf="element.linkedLineItem === 2">Equity Ratio</span>
+                  <span *ngIf="element.linkedLineItem === 3">Debt Service Coverage Ratio</span>
+                  <span *ngIf="element.linkedLineItem === 4">Operating Cash Flow</span>
+                  <span *ngIf="element.linkedLineItem === 5">Current Ratio</span>
+                  <span *ngIf="element.linkedLineItem === 6">Gross Profit</span>
+                  <span *ngIf="element.linkedLineItem === 7">Debt To Equity Ratio</span>
+                  <span *ngIf="element.linkedLineItem === 8">Interest Coverage Ratio</span>
+                  <span *ngIf="element.linkedLineItem === 9">Inventory Turnover</span>
+                </td>
+              </ng-container>
+              <!-- Name Column -->
+              <ng-container matColumnDef="idCounterparty">
+                <th mat-header-cell *matHeaderCellDef> Counterparty </th>
+                <td mat-cell *matCellDef="let element">{{ element.counterParty?.name }}</td>
+              </ng-container>
+
+              <!-- Buttons -->
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="hide-action">
+                    <button mat-icon-button (click)="supp(element.idCovenant)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="gotoUpdate(element.idCovenant)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+             <mat-paginator [pageSizeOptions]="[ 5, 10]"
+                            showFirstLastButtons
+                            aria-label="Select page of periodic elements"></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- Row -->
+  <!-- ============================================================== -->
+  <!-- End PAge Content -->
+  <!-- ============================================================== -->
+
+</div>
+
+
+
+
+
+
+
