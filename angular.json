@@ -32,7 +32,8 @@
               "src/assets/css/style.css",
               "src/assets/css/blue.css",
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css",
-              "node_modules/font-awesome/css/font-awesome.min.css"
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/js/jquery.min.js",

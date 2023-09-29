@@ -27,9 +27,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
+import { CovenantTemplatesComponent } from './covenant-templates/covenant-templates.component';
+import { MatCardModule } from '@angular/material/card';
+import { TemplateDetailsComponent } from './template-details/template-details.component';
 
 @NgModule({
-  declarations: [ListComponent, CreateComponent, UpdateComponent],
+  declarations: [
+    ListComponent,
+    CreateComponent,
+    UpdateComponent,
+    CovenantTemplatesComponent,
+    TemplateDetailsComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
@@ -57,6 +66,7 @@ import { UpdateComponent } from './update/update.component';
     MatTooltipModule,
     NgxMatSelectSearchModule,
     MatChipsModule,
+    MatCardModule,
   ],
 })
 export class CovenantModule {}

@@ -37,6 +37,16 @@ button {
   text-transform: uppercase;
 }
 
+/* Hide the tooltip by default */
+.tooltip {
+  display: none;
+}
+
+/* Show the tooltip when button is hovered */
+button:hover .tooltip {
+  display: inline-block;
+}
+
 .menu-title {
   display: inline-block;
   padding-right: 70%;

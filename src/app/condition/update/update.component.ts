@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Covenant, LinkedLineItemEnum } from 'src/core/entities/covenant.model';
 import { CovenantCondition } from 'src/core/entities/covenantCondition.model';
@@ -26,7 +27,8 @@ export class UpdateComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute, // Inject ActivatedRoute to get the covenant ID
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService
   ) {}
 
   ngOnDestroy() {
@@ -63,10 +65,7 @@ export class UpdateComponent implements OnInit, OnDestroy {
       .subscribe((condition) => {
         if (condition) {
           this.condition = condition;
-          console.log(
-            'FinancialData   :   ',
-            condition.financialData.totalEquity
-          );
+          console.log('Condition before update   :   ', condition);
           // Patch the form with the covenant data
           this.updateForm.patchValue({
             startDateCondition: condition.startDateCondition,
@@ -79,20 +78,6 @@ export class UpdateComponent implements OnInit, OnDestroy {
             // get financial data values
             financialData: condition.financialData,
           });
-        }
-      });
-  }
-
-  public goToCondition() {
-    // Get the condition ID from the route params
-    const conditionId = +(this.route.snapshot.paramMap.get('id') ?? 0);
-    this.conditionService
-      .getCovenantConditionById(conditionId)
-      .subscribe((condition) => {
-        if (condition) {
-          this.condition = condition;
-          const covenantId = +this.condition.idCovenant;
-          this.router.navigate(['/condition/list/', covenantId]);
         }
       });
   }
@@ -133,7 +118,18 @@ export class UpdateComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Add this private method to increment the date
+  private incrementDateByOneDay(date: Date): Date {
+    const incrementedDate = new Date(date);
+    incrementedDate.setDate(incrementedDate.getDate() + 1);
+    return incrementedDate;
+  }
+
   public update() {
+    // Store the initial start and end dates
+    const initialStartDate = this.condition.startDateCondition;
+    const initialEndDate = this.condition.endDateCondition;
+
     // Update the condition object with form values
     this.condition = {
       ...this.condition,
@@ -141,23 +137,65 @@ export class UpdateComponent implements OnInit, OnDestroy {
     };
     console.log(this.condition);
 
+    // Check if the start date is after the end date
+    if (this.condition.startDateCondition > this.condition.endDateCondition) {
+      // Display an error using toastr
+      this.toastr.error('Start date cannot be after the End date.', 'Error');
+      return; // Stop further processing
+    } else {
+      // Check if statements don't fall within modified covenant date range
+      const currentDate = new Date(); // Get the current date
+      if (
+        this.condition.startDateCondition > currentDate ||
+        currentDate > this.condition.endDateCondition
+      ) {
+        // Display a warning using toastr
+        this.toastr.warning(
+          'Warning: The current date falls within the modified covenant date range. Covenant results may need to be re-generated.',
+          'Warning'
+        );
+      }
+    }
+
+    // Check if the start date or end date has changed
+    const startDateChanged =
+      this.condition.startDateCondition !== initialStartDate;
+    const endDateChanged = this.condition.endDateCondition !== initialEndDate;
+    if (startDateChanged) {
+      // At least one of the dates has changed, so increment them
+      this.condition.startDateCondition = this.incrementDateByOneDay(
+        this.condition.startDateCondition
+      );
+    }
+    if (endDateChanged) {
+      this.condition.endDateCondition = this.incrementDateByOneDay(
+        this.condition.endDateCondition
+      );
+    }
+
     // Call the updateCovenantCondition method from the service
     this.conditionService
       .updateCovenantCondition(this.condition)
       .subscribe((response) => {
-        console.log(response);
-        if (response) {
-          this._snackBar.open('Updated with Success', 'Close', {
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            duration: 2000,
-          });
-        } else {
-          this._snackBar.open('Condition Updated Successfully', 'Close', {
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-            duration: 2000,
-          });
+        console.log('RESPONSE   :', response);
+        this._snackBar.open('Condition Updated Successfully', 'Close', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          duration: 2000,
+        });
+      });
+  }
+
+  public goToCondition() {
+    // Get the condition ID from the route params
+    const conditionId = +(this.route.snapshot.paramMap.get('id') ?? 0);
+    this.conditionService
+      .getCovenantConditionById(conditionId)
+      .subscribe((condition) => {
+        if (condition) {
+          this.condition = condition;
+          const covenantId = +this.condition.idCovenant;
+          this.router.navigate(['/condition/list/', covenantId]);
         }
       });
   }

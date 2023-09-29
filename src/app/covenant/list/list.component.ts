@@ -20,6 +20,10 @@ import { CounterpartyService } from 'src/core/services/counterparty.service';
 import { CounterParty } from 'src/core/entities/counterparty.model';
 import { FormControl } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
+import { PdfService } from 'src/core/services/pdf.service';
+import { forkJoin } from 'rxjs';
+import { ConditionService } from 'src/core/services/condition.service';
+import { ResultService } from 'src/core/services/result.service';
 
 @Component({
   selector: 'app-covenant-list',
@@ -44,13 +48,17 @@ export class ListComponent implements OnInit, AfterViewInit {
     'actions',
   ];
   dataSource!: MatTableDataSource<Covenant>;
+  covenant!: Covenant;
+
   constructor(
     private covenantService: CovenantService,
     private counterpartyService: CounterpartyService,
+    private conditionService: ConditionService,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit(): void {
@@ -181,6 +189,37 @@ export class ListComponent implements OnInit, AfterViewInit {
           });
         });
       }
+    });
+  }
+
+  /**
+   * download the covenant as a pdf file
+   */
+  download(id: number) {
+    // Use forkJoin to combine both observables
+    forkJoin([
+      this.covenantService.getCovenantById(id),
+      this.conditionService.filterConditionsByIdCovenant(id),
+    ]).subscribe(([covenantData, conditionData]) => {
+      this.counterpartyService
+        .getCounterpartyById(covenantData.idCounterparty)
+        .subscribe((counterpartyData) => {
+          // Generate the PDF
+          const pdfBlob = this.pdfService.generatePdf(
+            counterpartyData,
+            covenantData,
+            conditionData
+          );
+          // Create a blob URL for the PDF
+          const blobUrl = URL.createObjectURL(pdfBlob);
+          // Create an anchor element to trigger the download
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'Covenant.pdf';
+          a.click();
+          // Clean up the blob URL
+          URL.revokeObjectURL(blobUrl);
+        });
     });
   }
 }

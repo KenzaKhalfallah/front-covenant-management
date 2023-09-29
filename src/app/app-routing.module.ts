@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './template/layout/layout.component';
-import { HomeComponent } from './home/home.component';
+import { LayoutGlobalComponent } from './template/layout/layout.component';
+import { AuthGuard } from 'src/core/guards/auth.guard';
+import { ListComponent } from './covenant/list/list.component';
 
 const routes: Routes = [
-  // { path: 'covenants', component: CovenantListComponent },
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutGlobalComponent,
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: ListComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },
-  // Add other routes as needed
 ];
 
 @NgModule({

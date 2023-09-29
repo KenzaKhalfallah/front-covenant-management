@@ -40,6 +40,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     'actions',
   ];
   dataSource!: MatTableDataSource<CovenantCondition>;
+
   constructor(
     private conditionService: ConditionService,
     private resultService: ResultService,
@@ -171,6 +172,22 @@ export class ListComponent implements OnInit, AfterViewInit {
    */
   public gotoUpdate(id: number) {
     this.router.navigate(['/condition/update/', id]);
+  }
+
+  /**
+   * gotoNote
+   */
+  public gotoNote(id: number) {
+    this.resultService.getCovenantResultById(id).subscribe((result) => {
+      console.log('Note   :   ', result.resultNotes);
+      if (result.resultNotes.length === 0) {
+        this.router.navigate(['/resultNote/create/', id]);
+      } else if (result.resultNotes.length !== 0) {
+        this.router.navigate(['/resultNote/update/', id]);
+      } else {
+        console.log('Erreur when navigate to Note ! ');
+      }
+    });
   }
 
   /**

@@ -9,18 +9,29 @@
       <div class="card">
         <div class="card-body">
           <div class="mat-elevation-z8">
-            <form class="form-horizontal form-material" [formGroup]="updateForm" (ngSubmit)="update()">
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <div class="text-right">
+                  <button class="new-item" (click)="goToCondition()">
+                    <i class="mdi mdi-eye"></i> View Condition
+                  </button>
+                </div>
+              </div>
+            </div>
+            <form class="form-horizontal form-material" [formGroup]="updateForm" (ngSubmit)="updateForm.valid && update()" novalidate>
 
-              <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
                 <!--Les boutons-->
                 <div>
                   <h3 class="menu-title">Update Condition</h3>
-                  <button mat-raised-button color="Danger" (click)="goToCondition()">Exit</button>
                 </div>
                 <br><br><br>
+                </div>
               </div>
 
-              <div class="row">
+              <div class="row mx-2">
                 <div class="col-md-6">
 
                   <!--Champs Name-->

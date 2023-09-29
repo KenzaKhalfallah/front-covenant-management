@@ -19,16 +19,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CreateComponent } from './condition/create/create.component';
-import { UpdateComponent } from './condition/update/update.component';
-import { ListComponent } from './condition/list/list.component';
 import { ConditionModule } from './condition/condition.module';
+import { ResultNoteModule } from './resultNote/resultNote.module';
+import { QuillModule } from 'ngx-quill';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthenticationModule,
     CovenantModule,
     TemplateModule,
     HttpClientModule,
@@ -43,6 +45,15 @@ import { ConditionModule } from './condition/condition.module';
     MatDialogModule,
     BrowserAnimationsModule,
     ConditionModule,
+    ResultNoteModule,
+    QuillModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right', // Position of the toast
+      timeOut: 5000, // Duration to display the toast in milliseconds
+      progressBar: true, // Show a progress bar
+      closeButton: true, // Show a close button
+      preventDuplicates: true, // Prevent duplicate toasts
+    }),
   ],
   exports: [],
   providers: [],

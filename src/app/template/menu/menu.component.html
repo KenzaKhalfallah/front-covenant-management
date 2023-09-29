@@ -11,26 +11,7 @@
       <!-- User profile text-->
       <div class="profile-text">
         <h5>End User</h5>
-        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
-        <a href="#" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-        <a href="#" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-        <div class="dropdown-menu animated flipInY">
-          <!-- text-->
-          <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-          <!-- text-->
-          <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-          <!-- text-->
-          <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-          <!-- text-->
-          <div class="dropdown-divider"></div>
-          <!-- text-->
-          <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-          <!-- text-->
-          <div class="dropdown-divider"></div>
-          <!-- text-->
-          <a href="#" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-          <!-- text-->
-        </div>
+        <a (click)="logout()"  class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
       </div>
     </div>
     <!-- End User profile text-->
@@ -38,13 +19,16 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="nav-small-cap">Covenants</li>
-        <li> <a class="has-arrow waves-effect" routerLink="/covenant/list" aria-expanded="false"><i class="mdi mdi-view-list"></i><span class="hide-menu">List</span></a>
+        <li> <a class="has-arrow waves-effect" routerLink="/covenant/list" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Consult</span></a>
         </li>
         <li> <a class="has-arrow waves-effect" routerLink="/covenant/create" aria-expanded="false"><i class="mdi mdi-plus"></i><span class="hide-menu">Create</span></a>
         </li>
+        <li> <a class="has-arrow waves-effect" routerLink="/covenant/templates" aria-expanded="false"><i class="mdi mdi-file-document"></i>
+          <span class="hide-menu">Templates</span></a>
+        </li>
 
         <li class="nav-small-cap">Covenant Conditions</li>
-        <li> <a class="has-arrow waves-effect" routerLink="/condition/covenantFilter" aria-expanded="false"><i class="mdi mdi-view-list"></i><span class="hide-menu">List</span></a>
+        <li> <a class="has-arrow waves-effect" routerLink="/condition/covenantFilter" aria-expanded="false"><i class="mdi mdi-format-list-bulleted"></i><span class="hide-menu">Consult</span></a>
         </li>
       </ul>
     </nav>

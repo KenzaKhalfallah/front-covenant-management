@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row ">
+    <!-- Column -->
+    <div class="col-lg-12 col-xlg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="mat-elevation-z8">
+            <div class="template-card-row">
+
+              <ng-container *ngFor="let template of covenantTemplates; let i = index">
+                <mat-card class="example-card">
+                  <mat-card-header>
+                    <mat-card-title>{{ template.name }}</mat-card-title>
+                    <mat-card-subtitle>Category: {{ template.category }}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image src="../assets/images/Covenant.png" alt="Photo of a Shiba Inu">
+                  <mat-card-content>
+                    <p>{{ template.description }}</p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-button (click)="selectTemplate(template)">Details</button>
+                  </mat-card-actions>
+                </mat-card>
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

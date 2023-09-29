@@ -100,7 +100,6 @@ export class UpdateComponent implements OnInit, OnDestroy {
     this.counterpartyService
       .getAllCounterparties()
       .subscribe((counterparties) => {
-        console.log(counterparties);
         this.counterparties = counterparties;
       });
   }
@@ -111,26 +110,14 @@ export class UpdateComponent implements OnInit, OnDestroy {
       ...this.covenant,
       ...this.updateForm.value,
     };
-    console.log(this.covenant);
 
     // Call the updateCovenant method from the service
     this.covenantService.updateCovenant(this.covenant).subscribe((response) => {
-      console.log(response);
-      if (response) {
-        this._snackBar.open('Updated with Success', 'Close', {
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          duration: 2000,
-        });
-        // Redirect to the covenant detail page or any other appropriate route
-        this.router.navigate(['/covenant', this.covenant.idCovenant]);
-      } else {
-        this._snackBar.open('Covenant Updated Successfully', 'Close', {
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          duration: 2000,
-        });
-      }
+      this._snackBar.open('Covenant Updated Successfully', 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        duration: 2000,
+      });
     });
   }
 

@@ -26,6 +26,7 @@
       <div class="card">
         <div class="card-body">
           <!-- Search -->
+
         <div class="row">
           <div class="col-md-6">
             <mat-form-field>
@@ -39,7 +40,7 @@
             </mat-form-field>
           </div>
           <div class="col-md-6">
-          <div>
+          <div class="text-right">
             <button class="new-item" (click)="goToAddCondition()">
               <mat-icon class="icon">add_circle_outline</mat-icon> Add Condition
             </button>
@@ -107,6 +108,9 @@
                 <td mat-cell *matCellDef="let element" [ngClass]="{'passed-cell': element.covenantResult?.resultStatus === 1, 'failed-cell': element.covenantResult?.resultStatus === 2}">
                   <span *ngIf="element.covenantResult?.resultStatus=== 1" class="passed">&#10004;</span>
                   <span *ngIf="element.covenantResult?.resultStatus === 2" class="failed" >&#10008;</span>
+                  <button mat-button (click)="gotoNote(element.covenantResult?.idResult)">
+                  <i class="mdi mdi-clipboard-text"></i>
+                  </button>
               </ng-container>
 
               <!-- Buttons -->

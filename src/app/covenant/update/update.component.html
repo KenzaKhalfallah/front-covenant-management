@@ -20,7 +20,7 @@
                 <br><br><br>
               </div>
 
-              <div class="row">
+              <div class="row mx-2">
                 <div class="col-md-6">
 
                   <!--Champs Name-->
@@ -55,21 +55,10 @@
 
                     <div class="row">
                       <div class="col-md-6">
-                        <h2 class="texte">Type Covenant</h2>
-                        <mat-form-field class="form-field" appearance="outline">
-                          <mat-label> Type </mat-label>
-                          <mat-select formControlName="typeCovenant" required>
-                            <mat-option [value]='1' >Affirmative</mat-option>
-                            <mat-option [value]='2' >Negative</mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-
-                      <div class="col-md-6">
                         <h2 class="texte">Description</h2>
                         <mat-form-field class="form-field" appearance="outline">
                           <mat-label> Description </mat-label>
-                          <input matInput formControlName="descriptionCovenant" />
+                          <textarea matInput formControlName="descriptionCovenant" ></textarea>
                           <mat-error *ngIf="form['descriptionCovenant'].touched">
                             <span *ngIf="form['descriptionCovenant'].hasError('required')"
                               >This field is required.</span
@@ -78,6 +67,17 @@
                               >This field is invalid.</span
                             >
                           </mat-error>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6">
+                        <h2 class="texte">Type Covenant</h2>
+                        <mat-form-field class="form-field" appearance="outline">
+                          <mat-label> Type </mat-label>
+                          <mat-select formControlName="typeCovenant" required>
+                            <mat-option [value]='1' >Affirmative</mat-option>
+                            <mat-option [value]='2' >Negative</mat-option>
+                          </mat-select>
                         </mat-form-field>
                       </div>
                     </div>
@@ -144,19 +144,19 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                      <div>
-                        <h3 class="menu-title"></h3>
-                        <button class="new-item" (click)="goToCondition()">
-                          <i class="mdi mdi-eye"></i> View Condition
-                        </button>
-                      </div>
-                      <br><br><br>
-                      <br><br><br>
-                </div>
+
 
               </div>
             </form>
+            <div class="col-md-6">
+              <div>
+                <h3 class="menu-title"></h3>
+                <button class="new-item" (click)="goToCondition()">
+                  <i class="mdi mdi-eye"></i> View Condition
+                </button>
+              </div>
+             </div>
+             <br>
           </div>
        </div>
      </div>

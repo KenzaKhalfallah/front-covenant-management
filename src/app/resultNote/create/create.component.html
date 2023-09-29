@@ -1,1 +1,21 @@
-<p>create works!</p>
+<div class="create-note">
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="menu-title">Create New Note</h3>
+    </div>
+    <div class="col-md-6">
+      <div class="text-right">
+        <button class="small-button" class="back-item" (click)="goBack()">
+          <mat-icon class="icon"><i class="mdi mdi-keyboard-tab"></i>
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <div class="note-editor">
+    <quill-editor [style]="{'height': '200px'}" [(ngModel)]="resultNote.textNote"></quill-editor>
+  </div>
+
+  <button class="save-button" (click)="saveNote()">Save Note</button>
+</div>

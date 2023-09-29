@@ -1,0 +1,57 @@
+<div class="wrapper col-lg-12">
+  <div class="image-holder col-lg-6"></div>
+  <div class="login-container col-lg-6">
+    <div class="button-container">
+      <button routerLink="/createaccount" mat-button type="submit">
+        Create an account
+      </button>
+    </div>
+
+    <div class="form-container">
+      <h4 class="text">
+        Welcome to <span class="text-themecolor">Covenant Management </span>
+      </h4>
+      <form
+        class="form-horizontal form-material"
+        [formGroup]="loginForm"
+        (ngSubmit)="login($event)"
+      >
+        <!--Champs Email  -->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> <i class="mdi mdi-email-outline"></i> Email </mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="test@gmail.com"
+            required
+          />
+          <mat-error *ngIf="form['email'].hasError('required')">Required.</mat-error>
+          <mat-error *ngIf="form['email'].hasError('minlength')">Wrong input.</mat-error>
+        </mat-form-field>
+
+        <!--Champs password-->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label
+            ><i class="mdi mdi-key-variant"></i> Password
+          </mat-label>
+          <input
+            matInput
+            formControlName="password"
+            placeholder="Enter your password"
+            type="password"
+            required
+          />
+          <mat-error *ngIf="form['password'].hasError('required')">Required.</mat-error>
+          <mat-error *ngIf="form['password'].hasError('minlength')">Wrong input.</mat-error>
+        </mat-form-field>
+
+        <div class="small-wrapper">
+          <mat-checkbox color="primary">Remember me </mat-checkbox>
+        </div>
+
+        <button class="login-button" mat-button type="submit">Login</button>
+      </form>
+
+    </div>
+  </div>
+</div>

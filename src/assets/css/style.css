@@ -1871,6 +1871,15 @@ form label {
   z-index: 50
 }
 
+.topbar.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+
 .topbar .top-navbar {
   min-height: 50px;
   padding: 0px 15px 0 0

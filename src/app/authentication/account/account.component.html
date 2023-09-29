@@ -1,0 +1,100 @@
+<div class="wrapper col-lg-12">
+  <div class="image-holder col-lg-6"></div>
+  <div class="login-container col-lg-6">
+    <div class="button-container">
+      <button routerLink="/login" mat-button type="submit">Login</button>
+    </div>
+
+    <div class="form-container">
+      <h4 class="text">
+        Welcome to <span class="text-themecolor">Covenant Management </span>
+      </h4>
+      <form
+        class="form-horizontal form-material"
+        [formGroup]="createAccountForm"
+        (ngSubmit)="createAccountForm.valid && createAccount($event)" novalidate
+      >
+        <div class="display-inline">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label> <i class="mdi mdi-account-circle"></i> Full Name </mat-label>
+            <input
+              matInput
+              formControlName="name"
+              placeholder="Your full name"
+              required
+            />
+            <mat-error *ngIf="form['name'].hasError('required')">Required.</mat-error>
+            <mat-error *ngIf="form['name'].hasError('minlength')">Wrong input.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="display-inline">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label> <i class="mdi mdi-phone"></i> Phone number </mat-label>
+            <input
+              matInput
+              formControlName="telephone"
+              placeholder="+216 00 000 000 "
+              required
+            />
+            <mat-error *ngIf="form['telephone'].hasError('required')">Required.</mat-error>
+            <mat-error *ngIf="form['telephone'].hasError('minlength')">Wrong input.</mat-error>
+          </mat-form-field>
+
+        </div>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> <i class="mdi mdi-email-outline"></i> Email </mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Your email"
+            required
+          />
+          <mat-error *ngIf="form['email'].hasError('required')">Required.</mat-error>
+          <mat-error *ngIf="form['email'].hasError('minlength')">Wrong input.</mat-error>
+        </mat-form-field>
+
+        <!--Champs password-->
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>
+            <i class="mdi mdi-key-variant"></i> Password
+          </mat-label>
+          <input
+            matInput
+            formControlName="password"
+            placeholder="Enter your password "
+            type="password"
+            required
+          />
+          <mat-error *ngIf="form['password'].hasError('required')">Required.</mat-error>
+          <mat-error *ngIf="form['password'].hasError('minlength')">Wrong input.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label> <i class="mdi mdi-key-variant"></i> Confirm Password </mat-label>
+          <input
+            matInput
+            formControlName="confirmPassword"
+            placeholder="Confirm Your password "
+            type="password"
+            required
+          />
+          <mat-error *ngIf="form['confirmPassword'].hasError('required')">Required.</mat-error>
+          <mat-error>Passwords do not match.</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox
+          class="checkbox"
+          formControlName="ConditionsAccepted"
+          color="primary"
+        >
+          I accept <a> terms and conditions</a>
+        </mat-checkbox>
+
+        <button class="login-button" mat-button type="submit">
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

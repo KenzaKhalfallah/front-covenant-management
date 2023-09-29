@@ -1,12 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Covenant, LinkedLineItemEnum } from 'src/core/entities/covenant.model';
 import { CovenantCondition } from 'src/core/entities/covenantCondition.model';
@@ -31,7 +27,8 @@ export class CreateComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute, // Inject ActivatedRoute to get the covenant ID
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService
   ) {}
 
   ngOnDestroy() {
@@ -96,10 +93,30 @@ export class CreateComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Add this private method to increment the date
+  private incrementDateByOneDay(date: Date): Date {
+    const incrementedDate = new Date(date);
+    incrementedDate.setDate(incrementedDate.getDate() + 1);
+    return incrementedDate;
+  }
+
   public create() {
     this.condition = this.createForm.value;
     console.log(this.condition);
 
+    // Check if the start date is after the end date
+    if (this.condition.startDateCondition > this.condition.endDateCondition) {
+      // Display a warning using toastr
+      this.toastr.error('Start date cannot be after the End date.', 'Error');
+      return; // Stop further processing
+    }
+
+    this.condition.startDateCondition = this.incrementDateByOneDay(
+      this.condition.startDateCondition
+    );
+    this.condition.endDateCondition = this.incrementDateByOneDay(
+      this.condition.endDateCondition
+    );
     // Get the covenant ID from the route params
     const covenantId = +(this.route.snapshot.paramMap.get('id') ?? 0);
 

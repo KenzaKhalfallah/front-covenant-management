@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { CounterParty } from 'src/core/entities/counterparty.model';
 import { Covenant, LinkedLineItemEnum } from 'src/core/entities/covenant.model';
 import { CounterpartyService } from 'src/core/services/counterparty.service';
@@ -82,6 +82,7 @@ export class CreateComponent implements OnInit, OnDestroy {
           verticalPosition: 'top',
           duration: 2000,
         });
+        this.router.navigate(['/covenant/list']);
       } else {
         this._snackBar.open('All fields are required !', 'Close', {
           horizontalPosition: 'center',
